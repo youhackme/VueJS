@@ -8,6 +8,7 @@
 
 <div id="app">
     {{ message }}
+    <div id="name">My name is {{name}}</div>
 </div>
 
 <script src="js/vue.min.js"></script>
@@ -15,7 +16,8 @@
     new Vue({
         el: '#app',
         data: {
-            message: 'Hello Vue.js!'
+            message: 'Hello Vue.js! This is my first application!',
+            name:'Hyder'
         }
     })
 </script>
