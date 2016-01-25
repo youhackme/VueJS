@@ -7,11 +7,8 @@
 <body>
 
 <div id="app">
-    <ul>
-        <li v-for="todo in todos">
-            {{ todo.text }}
-        </li>
-    </ul>
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">Reverse Message</button>
 </div>
 
 <script src="js/vue.min.js"></script>
@@ -19,11 +16,12 @@
     new Vue({
         el: '#app',
         data: {
-            todos: [
-                { text: 'Learn JavaScript' },
-                { text: 'Learn Vue.js' },
-                { text: 'Build Something Awesome' }
-            ]
+            message: 'Hello Vue.js!'
+        },
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('')
+            }
         }
     })
 </script>
