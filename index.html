@@ -8,25 +8,32 @@
 
 <div id="app">
 
-    <form action="done.html" >
-        <input type="submit" name="submit" id="submit" value="send message" v-on:click.prevent="handleIt">
-    </form>
+<counter subject="Likes" identifier="Doubie"></counter>
+    <counter subject="Dislikes" identifier="Hyder"></counter>
+
 
 </div>
 
+<template id="counter-template">
+    <h1>{{subject}} {{identifier}}</h1>
+    <button @click="count+=1"> {{count}}</button>
+</template>
+
 <script src="js/vue.min.js"></script>
 <script>
+
+    Vue.component('counter',{
+        template:'#counter-template',
+        data:function(){
+            return {count:0};
+        },
+        props:['subject','identifier']
+
+    })
     new Vue({
         el: '#app',
         data: {
-            message: "",
-            error: false
-        },
-        methods:{
-            handleIt:function(){
-                alert('Handled');
-                //event.preventDefault();
-            }
+            count: 0
         }
     })
 
