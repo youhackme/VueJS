@@ -6,23 +6,31 @@
 </head>
 <body>
 
-<div id="demo">{{fullName}}</div>
+<div id="app">
+
+    <span v-show="!message" class="error">You must enter a message</span>
+    <br/>
+    <textarea name="message" id="message" v-model="message" cols="50" rows="10">{{message}}</textarea>
+    <br/>
+    <input type="submit" name="submit" id="submit" value="send message" v-show="message">
+    <pre>{{$data|json}}</pre>
+</div>
 
 <script src="js/vue.min.js"></script>
 <script>
-    var vm = new Vue({
-        el:'#demo',
+    new Vue({
+        el: '#app',
         data: {
-            firstName: 'Foo',
-            lastName: 'Bar'
-        },
-        computed: {
-            fullName: function () {
-                return this.firstName + ' ' + this.lastName
-            }
+            message: "",
+            error: false
         }
     })
-</script>
 
+</script>
+<style>
+    .error{
+        color: red;
+    }
+</style>
 </body>
 </html>
