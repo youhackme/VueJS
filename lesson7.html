@@ -7,20 +7,23 @@
 <body>
 
 <div id="app">
-<tasks :list="tasks"></tasks>
+    <tasks :list="tasks"></tasks>
 
 </div>
 
 
 <template id="tasks-template">
-
-    <ul>
+    <h1>My Tasks <span v-show="remaining">{{remaining}}</span></h1>
+    <ul v-show="list.length">
         <li :class="{completed: task.completed}"
             v-for="task in list"
             @click="toggleCompletedFor(task)">{{task.body}}
 
+            <strong @click="deleteTask(task)">x</strong>
         </li>
     </ul>
+    <p v-else>No tasks yet!</p>
+    <button @click="clearCompleted">Clear Completed</button>
 </template>
 
 <style>
@@ -32,25 +35,48 @@
 <script src="js/vue.min.js"></script>
 <script>
 
-    Vue.component('tasks',{
+    Vue.component('tasks', {
         template: '#tasks-template',
-        props:['list'],
-        methods:{
-            toggleCompletedFor: function(task){
+        props: ['list'],
+        methods: {
+            toggleCompletedFor: function (task) {
                 console.log(task);
                 task.completed = !task.completed;
+            },
+            isCompleted:function(task){
+                return task.completed;
+            },
+            isInProgress:function(task){
+                return !this.isCompleted(task);
+            },
+            deleteTask: function(task){
+                this.list.$remove(task);
+            },
+            clearCompleted:function(){
+              this.list =   this.list.filter(this.isInProgress);
+            }
+        },
+        computed: {
+            remaining: function () {
+                var vm = this;
+                var inProgress = this.list.filter(function (task) {
+                  //  return !task.completed;
+                    return vm.isInProgress(task);
+                })
+
+                return inProgress.length;
             }
         }
     })
 
-    new Vue({
+    var vm = new Vue({
         el: '#app',
 
         data: {
-            tasks:[
-                {body:'Go to the doctor', completed: false},
-                {body:'Go to the bank', completed: true}     ,
-                {body:'Go to the store', completed: false}
+            tasks: [
+                {body: 'Go to the doctor', completed: false},
+                {body: 'Go to the bank', completed: true},
+                {body: 'Go to the store', completed: false}
             ]
         },
 
@@ -58,7 +84,7 @@
 
 </script>
 <style>
-    .error{
+    .error {
         color: red;
     }
 </style>
