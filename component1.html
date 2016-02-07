@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Component</title>
+</head>
+<body>
+
+<div id="app">
+    <my-component></my-component>
+    <my-component></my-component>
+    <my-component></my-component>
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script>
+    // define
+    var MyComponent = Vue.extend({
+        template: '<div>This is my first awesome component!</div>'
+    })
+
+    // register
+    Vue.component('my-component', MyComponent)
+
+    // create a root instance
+    new Vue({
+        el: '#app'
+    })
+</script>
+<style>
+    .error{
+        color: red;
+    }
+</style>
+</body>
+</html>

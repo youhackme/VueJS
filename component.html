@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Component</title>
+</head>
+<body>
+
+<div id="app">
+    {{a}}
+
+
+
+
+
+    <hyder-component>
+        <my-component></my-component>
+    </hyder-component>
+
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script>
+
+
+
+    var Child = Vue.extend({
+        template: '<div>A custom component! - {{a}} {{message}}</div>',
+        data: function(){
+            return {a:100}
+        }
+    })
+
+    // register
+    Vue.component('my-component', Child)
+
+    Vue.component('hyder-component', Parent)
+
+    var Parent = Vue.extend({
+        template: '<div class="parent-template">This is my parent\'s template</div>',
+        components: {
+            // <my-component> will only be available in Parent's template
+            'my-component': Child
+        }
+    })
+
+
+
+    // create a root instance
+    new Vue({
+        el: '#app',
+        data:{
+            message:"Heye"
+        }
+    })
+
+</script>
+<style>
+    .error{
+        color: red;
+    }
+</style>
+</body>
+</html>

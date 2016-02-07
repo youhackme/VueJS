@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Component</title>
+</head>
+<body>
+
+<div id="app">
+    <parent-component><strong>Hello. I am part of this component</strong></parent-component>
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script>
+
+    // extend and register in one step
+
+    // also works for local registration
+    var Parent = Vue.extend({
+        template:'This is a parent template',
+        components: {
+            'my-component': {
+                template: '<div>A custom child component!</div>'
+            }
+        }
+    })
+
+    Vue.component('parent-component', Parent);
+
+    // create a root instance
+    new Vue({
+        el: '#app'
+    })
+
+</script>
+
+</body>
+</html>

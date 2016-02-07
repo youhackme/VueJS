@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Component</title>
+</head>
+<body>
+
+<div id="app">
+
+    <input v-model="parentMsg">
+    <br>
+
+    <child :msg.once="parentMsg"></child>
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script>
+
+    Vue.component('child', {
+        // declare the props
+        props: ['msg'],
+        // the prop can be used inside templates, and will also
+        // be set as `this.msg`
+        template: '<span>{{ msg }}</span>'
+    })
+
+    // create a root instance
+    new Vue({
+        el: '#app'
+    })
+
+</script>
+
+</body>
+</html>

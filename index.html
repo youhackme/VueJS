@@ -8,32 +8,39 @@
 
 <div id="app">
 
-<counter subject="Likes" identifier="Doubie"></counter>
-    <counter subject="Dislikes" identifier="Hyder"></counter>
+    <a :href="lol">Hello</a>
 
 
+<div v-for="test in plans" class="n_plan">
+    <test v-bind:plan="test"></test>
+</div>
 </div>
 
-<template id="counter-template">
-    <h1>{{subject}} {{identifier}}</h1>
-    <button @click="count+=1"> {{count}}</button>
+<template id="plan-template">
+<span>{{plan.name}}</span>
+    <span>{{plan.price}}</span>
 </template>
 
 <script src="js/vue.min.js"></script>
 <script>
 
-    Vue.component('counter',{
-        template:'#counter-template',
-        data:function(){
-            return {count:0};
-        },
-        props:['subject','identifier']
 
-    })
     new Vue({
         el: '#app',
         data: {
-            count: 0
+            lol:"http://google.com",
+            plans:[
+                {name:'Enterprise', price:100},
+                {name:'Pro', price:50},
+                {name:'Personal', price:10},
+                {name:'Free', price:5}
+            ]
+        },
+        components:{
+            plan:{
+                template:"#plan-template",
+                props:['plan']
+            }
         }
     })
 

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Component</title>
+</head>
+<body>
+
+<div id="app">
+
+    <my-component></my-component>
+    <parent-component>
+
+    </parent-component>
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script>
+    var Child = Vue.extend({
+        template: '<div>This is a child component.</div>'
+    })
+
+    var Parent = Vue.extend({
+        template: '<div>This is a parent component</div>',
+        components: {
+            // <my-component> will only be available in Parent's template
+            'my-component': Child
+        }
+    })
+
+    // register
+    Vue.component('my-component', Child);
+    Vue.component('parent-component', Parent);
+    // create a root instance
+    new Vue({
+        el: '#app'
+    })
+
+</script>
+<style>
+    .error{
+        color: red;
+    }
+</style>
+</body>
+</html>
