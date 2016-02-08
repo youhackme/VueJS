@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <alert type="success">
+        <strong>Success!</strong> Hey
+    </alert>
+
+    <alert type="success">
+        <strong>Success!</strong> Another message
+    </alert>
+
+
+
+</div>
+
+<template id="alert-template">
+    <div class="Alert">
+        <slot></slot>
+        <span class="Alert__close">
+            x
+        </span>
+    </div>
+</template>
+
+
+<script src="js/vue.min.js"></script>
+
+<script>
+
+    Vue.component('alert',{
+        template:'#alert-template'
+    })
+
+    var vm = new Vue({
+        el: '#app',
+
+
+    })
+</script>
+
+<style>
+    .Alert{
+        background:#ddd;
+        border:1px solid darken(#ddd,10%);
+        padding:1em;
+    }
+    .Alert__close{
+        position:absolute;
+        top:1em;
+        right:1em;
+        font-weight:bold;
+        cursor: pointer;
+    }
+</style>
+
+</body>
+</html>
